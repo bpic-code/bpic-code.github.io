@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!input || !results) return;
 
-  const response = await fetch(`${window.location.origin}{{ site.baseurl }}/search.json`);
+  const response = await fetch("/docs/search.json");
   const pages = await response.json();
 
   const fuse = new Fuse(pages, {
