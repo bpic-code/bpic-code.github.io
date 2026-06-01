@@ -6,6 +6,3 @@ plugins:
 relative_links:
   enabled: true
   collections: true
-include:
-  - TEST.md
-markdown: kramdown
