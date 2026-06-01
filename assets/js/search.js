@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         Impossible de charger l'index de recherche.
       </div>
     `;
+
+    results.style.display = "block";
     return;
   }
 
@@ -46,7 +48,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     threshold: 0.35,
     ignoreLocation: true,
     includeScore: true,
-    includeMatches: true,
     minMatchCharLength: 2,
     findAllMatches: true
   });
@@ -55,7 +56,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     return String(text || "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 
   function displayResults(matches) {
@@ -99,7 +102,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const matches = fuse.search(query);
-
     displayResults(matches);
   });
 
