@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 📚 Mon Wiki
+title: 🏠 Accueil
 ---
 
-# 📚 Bienvenue sur le Wiki
+# 🏠 Bienvenue sur le Wiki
 
 Découvrez notre collection de recettes, guides pratiques et références techniques.
 
