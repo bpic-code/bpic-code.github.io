@@ -3,7 +3,6 @@ title: Mon Wiki
 description: Wiki moderne et structuré
 lang: fr
 url: "https://bpic-code.github.io"
-baseurl: "/docs"
 # Configuration Jekyll
 markdown: kramdown
 highlighter: rouge
