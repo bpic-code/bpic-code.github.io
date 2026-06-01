@@ -1,3 +1,5 @@
-# Test de site
+# Bienvenue
 
-**un test de markdown**
+Rendez-vous sur le [Wiki principal](docs/)
+
+[Accéder au Wiki →](docs/)
