@@ -10,87 +10,103 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const response = await fetch(`${baseUrl}/search.json`);
-    if (!response.ok) throw new Error(`Erreur HTTP ${response.status}`);
+
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP ${response.status}`);
+    }
+
     pages = await response.json();
   } catch (error) {
-    console.error("Erreur chargement search.json :", error);
-    results.innerHTML = `<div class="search-error">Recherche indisponible</div>`;
-    return;
-  }
+    console.error("Erreur lors du chargement de search.json :", error);
 
-  if (typeof Fuse === "undefined") {
-    console.error("Fuse.js n'est pas chargé");
+    results.innerHTML = `
+      <div class="search-error">
+        Impossible de charger l'index de recherche.
+      </div>
+    `;
     return;
   }
 
   const fuse = new Fuse(pages, {
     keys: [
-      { name: "content", weight: 0.8 },
-      { name: "title", weight: 0.2 }
+      {
+        name: "content",
+        weight: 0.8
+      },
+      {
+        name: "title",
+        weight: 0.2
+      }
     ],
-    threshold: 0.45,
+    threshold: 0.35,
     ignoreLocation: true,
-    minMatchCharLength: 2,
     includeScore: true,
-    includeMatches: true
+    includeMatches: true,
+    minMatchCharLength: 2,
+    findAllMatches: true
   });
 
   function escapeHtml(text) {
     return String(text || "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+      .replace(/>/g, "&gt;");
   }
 
-  function makeExcerpt(content, query) {
+  function buildExcerpt(content, query) {
     if (!content) return "";
 
-    const cleanContent = String(content).replace(/\s+/g, " ").trim();
-    const lowerContent = cleanContent.toLowerCase();
-    const lowerQuery = query.toLowerCase();
+    const text = content.replace(/\s+/g, " ").trim();
 
-    const index = lowerContent.indexOf(lowerQuery);
+    const pos = text.toLowerCase().indexOf(query.toLowerCase());
 
-    if (index === -1) {
-      return cleanContent.slice(0, 160) + (cleanContent.length > 160 ? "..." : "");
+    if (pos === -1) {
+      return text.substring(0, 180) + "...";
     }
 
-    const start = Math.max(0, index - 70);
-    const end = Math.min(cleanContent.length, index + lowerQuery.length + 90);
+    const start = Math.max(0, pos - 80);
+    const end = Math.min(text.length, pos + query.length + 100);
 
-    const before = start > 0 ? "..." : "";
-    const after = end < cleanContent.length ? "..." : "";
+    let excerpt = text.substring(start, end);
 
-    return before + cleanContent.slice(start, end) + after;
+    if (start > 0) excerpt = "..." + excerpt;
+    if (end < text.length) excerpt += "...";
+
+    return excerpt;
   }
 
-  function renderResults(matches, query) {
+  function displayResults(matches, query) {
     results.innerHTML = "";
 
     if (matches.length === 0) {
-      results.innerHTML = `<div class="search-empty">Aucun résultat trouvé</div>`;
+      results.innerHTML = `
+        <div class="search-empty">
+          Aucun résultat trouvé
+        </div>
+      `;
       results.style.display = "block";
       return;
     }
 
-    matches.slice(0, 12).forEach(({ item }) => {
-      const title = escapeHtml(item.title || "Sans titre");
-      const url = escapeHtml(item.url || "#");
-      const excerpt = escapeHtml(makeExcerpt(item.content, query));
+    matches.slice(0, 15).forEach(result => {
+      const page = result.item;
 
-      const div = document.createElement("div");
-      div.className = "search-result";
+      const excerpt = buildExcerpt(
+        page.content || "",
+        query
+      );
 
-      div.innerHTML = `
-        <a href="${url}">
-          <strong>${title}</strong>
-          <p>${excerpt}</p>
+      const item = document.createElement("div");
+      item.className = "search-result";
+
+      item.innerHTML = `
+        <a href="${page.url}">
+          <strong>${escapeHtml(page.title || "Sans titre")}</strong>
+          <p>${escapeHtml(excerpt)}</p>
         </a>
       `;
 
-      results.appendChild(div);
+      results.appendChild(item);
     });
 
     results.style.display = "block";
@@ -106,17 +122,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const matches = fuse.search(query);
-    renderResults(matches, query);
+
+    displayResults(matches, query);
   });
 
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", event => {
     if (!event.target.closest(".search-section")) {
       results.style.display = "none";
     }
   });
 
   input.addEventListener("focus", () => {
-    if (results.innerHTML.trim()) {
+    if (results.innerHTML.trim() !== "") {
       results.style.display = "block";
     }
   });
