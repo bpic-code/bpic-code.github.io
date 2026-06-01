@@ -1,64 +1,27 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  console.log("=== DEBUG RECHERCHE ===");
-
   const input = document.getElementById("searchInput");
   const results = document.getElementById("searchResults");
 
-  console.log("Champ recherche :", input);
-  console.log("Zone résultats :", results);
-
-  if (!input || !results) {
-    console.error("Éléments HTML introuvables");
-    return;
-  }
+  if (!input || !results) return;
 
   const baseUrl = window.siteBaseUrl || "";
-
-  console.log("window.siteBaseUrl =", window.siteBaseUrl);
-  console.log("baseUrl =", baseUrl);
-
-  const searchUrl = `${baseUrl}/search.json`;
-
-  console.log("URL utilisée pour search.json :", searchUrl);
 
   let pages = [];
 
   try {
-    console.log("Chargement de search.json...");
-
-    const response = await fetch(searchUrl);
-
-    console.log("Status HTTP :", response.status);
-    console.log("Status Text :", response.statusText);
-    console.log("URL finale :", response.url);
+    const response = await fetch(`${baseUrl}/search.json`);
 
     if (!response.ok) {
-      throw new Error(
-        `Erreur HTTP ${response.status} (${response.statusText})`
-      );
+      throw new Error(`Erreur HTTP ${response.status}`);
     }
 
-    const rawText = await response.text();
-
-    console.log("Taille JSON :", rawText.length, "caractères");
-    console.log("Aperçu JSON :", rawText.substring(0, 500));
-
-    pages = JSON.parse(rawText);
-
-    console.log("Pages chargées :", pages.length);
-
-    if (pages.length > 0) {
-      console.log("Premier élément :", pages[0]);
-    } else {
-      console.warn("ATTENTION : search.json est vide");
-    }
-
+    pages = await response.json();
   } catch (error) {
-    console.error("Erreur chargement search.json :", error);
+    console.error("Erreur chargement recherche :", error);
 
     results.innerHTML = `
-      <div style="color:red">
-        Impossible de charger search.json
+      <div class="search-error">
+        Impossible de charger l'index de recherche.
       </div>
     `;
 
@@ -66,58 +29,72 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   if (typeof Fuse === "undefined") {
-    console.error("Fuse.js n'est pas chargé !");
+    console.error("Fuse.js n'est pas chargé.");
     return;
   }
 
-  console.log("Fuse.js détecté :", Fuse);
-
   const fuse = new Fuse(pages, {
-    keys: ["title", "content"],
+    keys: [
+      { name: "title", weight: 0.7 },
+      { name: "content", weight: 0.3 }
+    ],
     threshold: 0.35,
-    includeScore: true,
-    minMatchCharLength: 2
+    minMatchCharLength: 2,
+    includeScore: true
   });
-
-  console.log("Index Fuse créé");
 
   input.addEventListener("input", () => {
     const query = input.value.trim();
 
-    console.log("Recherche :", query);
-
     results.innerHTML = "";
 
     if (query.length < 2) {
-      console.log("Moins de 2 caractères");
+      results.style.display = "none";
       return;
     }
 
-    const matches = fuse.search(query);
+    const matches = fuse.search(query).slice(0, 10);
 
-    console.log("Résultats trouvés :", matches.length);
+    if (matches.length === 0) {
+      results.innerHTML = `
+        <div class="search-empty">
+          Aucun résultat trouvé
+        </div>
+      `;
+      results.style.display = "block";
+      return;
+    }
 
-    matches.slice(0, 10).forEach(({ item, score }) => {
-      console.log("Match :", item.title, "score =", score);
+    matches.forEach(({ item }) => {
+      const result = document.createElement("div");
+      result.className = "search-result";
 
-      const div = document.createElement("div");
-      div.className = "search-result";
+      const excerpt = item.content
+        ? item.content.substring(0, 120) + "..."
+        : "";
 
-      div.innerHTML = `
+      result.innerHTML = `
         <a href="${item.url}">
           <strong>${item.title || "Sans titre"}</strong>
-          <br>
-          <small>${item.url}</small>
+          <p>${excerpt}</p>
         </a>
       `;
 
-      results.appendChild(div);
+      results.appendChild(result);
     });
 
-    if (matches.length === 0) {
-      results.innerHTML = "<p>Aucun résultat</p>";
+    results.style.display = "block";
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".search-section")) {
+      results.style.display = "none";
     }
   });
 
-  console.log("Recherche initialisée avec succès");
+  input.addEventListener("focus", () => {
+    if (results.innerHTML.trim() !== "") {
+      results.style.display = "block";
+    }
+  });
 });
