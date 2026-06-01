@@ -9,9 +9,9 @@ Découvrez nos délicieuses recettes organisées par catégories.
 
 ## Recettes disponibles
 
-- [Pâtes Carbonara](recette-carbonara.md)
-- [Tarte aux Pommes](recette-tarte-pommes.md)
-- [Soupe à l'Oignon](recette-soupe-oignon.md)
+- [Vert caca](vert.md)
+- [Rouge caca](rouge.md)
+- [Jaune caca](jaune.md)
 
 ---
 

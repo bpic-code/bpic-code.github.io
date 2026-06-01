@@ -9,9 +9,8 @@ Apprenez avec nos guides détaillés et pratiques.
 
 ## Guides disponibles
 
-- [Installation du Projet](guide-installation.md)
-- [Configuration Avancée](guide-configuration.md)
-- [Bonnes Pratiques](guide-bonnes-pratiques.md)
+- [Faire des grosses croutes](croutes.md)
+- [Rater Sa fig](fail.md)
 
 ---
 
