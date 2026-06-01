@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  if (typeof Fuse === "undefined") {
+    console.error("Fuse.js n'est pas chargé.");
+    return;
+  }
+
   const fuse = new Fuse(pages, {
     keys: [
       {
@@ -53,29 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       .replace(/>/g, "&gt;");
   }
 
-  function buildExcerpt(content, query) {
-    if (!content) return "";
-
-    const text = content.replace(/\s+/g, " ").trim();
-
-    const pos = text.toLowerCase().indexOf(query.toLowerCase());
-
-    if (pos === -1) {
-      return text.substring(0, 180) + "...";
-    }
-
-    const start = Math.max(0, pos - 80);
-    const end = Math.min(text.length, pos + query.length + 100);
-
-    let excerpt = text.substring(start, end);
-
-    if (start > 0) excerpt = "..." + excerpt;
-    if (end < text.length) excerpt += "...";
-
-    return excerpt;
-  }
-
-  function displayResults(matches, query) {
+  function displayResults(matches) {
     results.innerHTML = "";
 
     if (matches.length === 0) {
@@ -91,18 +74,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     matches.slice(0, 15).forEach(result => {
       const page = result.item;
 
-      const excerpt = buildExcerpt(
-        page.content || "",
-        query
-      );
-
       const item = document.createElement("div");
       item.className = "search-result";
 
       item.innerHTML = `
-        <a href="${page.url}">
-          <strong>${escapeHtml(page.title || "Sans titre")}</strong>
-          <p>${escapeHtml(excerpt)}</p>
+        <a class="search-result-link" href="${page.url}">
+          ${escapeHtml(page.title || "Sans titre")}
         </a>
       `;
 
@@ -123,7 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const matches = fuse.search(query);
 
-    displayResults(matches, query);
+    displayResults(matches);
   });
 
   document.addEventListener("click", event => {
