@@ -1,63 +1,32 @@
 ---
 layout: default
-title: 📚 Wiki Principal
-tags: [accueil, navigation]
+title: 📚 Mon Wiki
 ---
 
-# 📚 Wiki Principal
+# 📚 Bienvenue sur le Wiki
 
-Bienvenue sur le wiki ! Sélectionnez une catégorie ci-dessous pour explorer le contenu.
-
----
-
-## 📖 Guides
-**Commencez ici pour les principes fondamentaux.**
-
-[Accéder aux Guides →](guides/)
-
-Apprenez les concepts de base du projet avec nos guides complets et faciles à suivre.
+Découvrez notre collection de recettes, guides pratiques et références techniques.
 
 ---
 
-## 🎓 Tutoriels
-**Apprenez par l'exemple avec nos tutoriels détaillés.**
+<div class="category-grid">
 
-[Accéder aux Tutoriels →](tutoriels/)
+<div class="category-card">
+  <h2>🍳 Recettes</h2>
+  <p>Explorez notre collection de recettes délicieuses avec des instructions pas à pas.</p>
+  <a href="/docs/recettes/">Voir les recettes →</a>
+</div>
 
-Suivez des tutoriels pas à pas pour maîtriser les fonctionnalités.
+<div class="category-card">
+  <h2>📖 Guides</h2>
+  <p>Apprenez avec nos guides complets et détaillés sur divers sujets.</p>
+  <a href="/docs/guides/">Consulter les guides →</a>
+</div>
 
----
+<div class="category-card">
+  <h2>📚 Références</h2>
+  <p>Accédez à la documentation technique complète et aux ressources de référence.</p>
+  <a href="/docs/references/">Explorer les références →</a>
+</div>
 
-## 📚 Références
-**Documentation complète et API.**
-
-[Accéder aux Références →](references/)
-
-Consultez la documentation technique complète et les références d'API.
-
----
-
-## ❓ FAQ
-**Réponses aux questions fréquemment posées.**
-
-[Accéder à la FAQ →](faq/)
-
-Trouvez les réponses aux questions les plus courantes.
-
----
-
-## 🤝 Contributions
-**Comment contribuer au projet.**
-
-[Guide de Contribution →](contributions/)
-
-Découvrez comment contribuer et améliorer le wiki.
-
----
-
-<div class="page-tags">
-  <strong>Tags :</strong>
-  {% for tag in page.tags %}
-    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
-  {% endfor %}
 </div>

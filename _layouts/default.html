@@ -8,34 +8,32 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 </head>
 <body>
-    <!-- Barre de Navigation Fixe -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-brand">
-                <a href="/docs/">📚 Mon Wiki</a>
-            </div>
-            
-            <div class="navbar-menu">
-                <a href="/docs/" class="nav-link">🏠 Accueil</a>
-                <a href="/docs/guides/" class="nav-link">📖 Guides</a>
-                <a href="/docs/tutoriels/" class="nav-link">🎓 Tutoriels</a>
-                <a href="/docs/references/" class="nav-link">📚 Références</a>
-                <a href="/docs/faq/" class="nav-link">❓ FAQ</a>
-                <a href="/docs/contributions/" class="nav-link">🤝 Contributions</a>
-            </div>
-            
-            <div class="navbar-search">
-                <input type="text" id="searchInput" placeholder="🔍 Rechercher..." class="search-box">
-                <div id="searchResults" class="search-results"></div>
-            </div>
-        </div>
-    </nav>
+    <div class="main-wrapper">
+        <!-- Sidebar avec Navigation et Recherche -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="logo">
+                    <h1>📚</h1>
+                    <h2>Mon Wiki</h2>
+                </div>
 
-    <main class="container">
-        <div class="page-wrapper">
-            <!-- Sidebar avec tags -->
-            <aside class="sidebar">
-                <div class="sidebar-section">
+                <!-- Barre de Recherche -->
+                <div class="search-section">
+                    <input type="text" id="searchInput" placeholder="Rechercher..." class="search-box">
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav-menu">
+                    <a href="/docs/" class="nav-link {% if page.url == '/docs/' %}active{% endif %}">🏠 Accueil</a>
+                    <a href="/docs/recettes/" class="nav-link {% if page.url contains 'recettes' %}active{% endif %}">🍳 Recettes</a>
+                    <a href="/docs/guides/" class="nav-link {% if page.url contains 'guides' %}active{% endif %}">📖 Guides</a>
+                    <a href="/docs/references/" class="nav-link {% if page.url contains 'references' %}active{% endif %}">📚 Références</a>
+                    <a href="/docs/tags.html" class="nav-link {% if page.url == '/docs/tags.html' %}active{% endif %}">🏷️ Tags</a>
+                </nav>
+
+                <!-- Tags disponibles -->
+                <div class="tags-sidebar">
                     <h3>🏷️ Tags</h3>
                     <div class="tags-list">
                         {% assign all_tags = "" | split: "" %}
@@ -50,22 +48,24 @@
                         {% endfor %}
                         
                         {% for tag in all_tags | sort %}
-                            <a href="#" class="tag-badge" data-tag="{{ tag }}">{{ tag }}</a>
+                            <a href="/docs/tags/{{ tag | slugify }}.html" class="tag-badge">{{ tag }}</a>
                         {% endfor %}
                     </div>
                 </div>
-            </aside>
+            </div>
+        </aside>
 
-            <!-- Contenu Principal -->
+        <!-- Contenu Principal -->
+        <main class="main-content">
             <article class="content">
                 {{ content }}
             </article>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <p>Créé avec ❤️ GitHub Pages & Jekyll | Dernière mise à jour: {{ site.time | date: "%d/%m/%Y" }}</p>
-    </footer>
+            
+            <footer class="footer">
+                <p>Créé avec ❤️ GitHub Pages & Jekyll | {{ site.time | date: "%d/%m/%Y" }}</p>
+            </footer>
+        </main>
+    </div>
 
     <script src="{{ site.baseurl }}/assets/js/search.js"></script>
     <script src="{{ site.baseurl }}/assets/js/tags.js"></script>

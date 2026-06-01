@@ -17,15 +17,20 @@ permalink: /docs/tags.html
     {% endif %}
 {% endfor %}
 
+Clic sur un tag pour voir toutes les pages contenant ce tag.
+
 ## Tags disponibles
 
 {% for tag in all_tags | sort %}
-  ### {{ tag }}
+  ### 🏷️ {{ tag }}
   
-  Pages avec ce tag :
+  Pages contenant ce tag :
+  
   {% assign tagged_pages = site.pages | where_exp: "page", "page.tags contains tag" %}
+  <ul class="pages-list">
   {% for page in tagged_pages %}
-    - [{{ page.title }}]({{ page.url }})
+    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
   {% endfor %}
+  </ul>
 
 {% endfor %}

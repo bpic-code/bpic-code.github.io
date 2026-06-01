@@ -1,30 +1,20 @@
 ---
 layout: default
 title: 📖 Guides
-tags: [guide, tutoriel, bases]
 ---
 
 # 📖 Guides
 
-**Commencez ici pour découvrir les principes fondamentaux.**
+Apprenez avec nos guides détaillés et pratiques.
+
+## Guides disponibles
+
+- [Installation du Projet](guide-installation.md)
+- [Configuration Avancée](guide-configuration.md)
+- [Bonnes Pratiques](guide-bonnes-pratiques.md)
 
 ---
-
-## Articles disponibles
-
-- [Installation](installation.md)
-- [Configuration](configuration.md)
-- [Démarrage Rapide](demarrage-rapide.md)
-
----
-
-<div class="page-tags">
-  <strong>Tags :</strong>
-  {% for tag in page.tags %}
-    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
-  {% endfor %}
-</div>
 
 ## 🔗 Navigation
 
-[← Retour au Wiki Principal](../index.md)
+[← Retour à l'accueil](/docs/)

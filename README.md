@@ -1,35 +1,24 @@
 # 📚 Mon Wiki
 
-Un wiki structuré, professionnel et facile à naviguer créé avec GitHub Pages et Jekyll.
+Un wiki moderne et élégant avec une navigation fixe à droite.
 
 ## 🌟 Caractéristiques
 
-✨ **Navigation fluide** - Barre de navigation fixe toujours visible  
-🔍 **Recherche en temps réel** - Trouvez rapidement ce que vous cherchez  
-🏷️ **Système de tags** - Organisez et filtrez le contenu par tags  
-🎨 **Design moderne** - Thème Cayman avec sidebar et responsive  
-📱 **Mobile-friendly** - Parfaitement adapté à tous les écrans
+✨ **Design Moderne** - Interface épurée avec gradient violet  
+🧭 **Navigation Fixe à Droite** - Toujours accessible  
+🔍 **Recherche en Temps Réel** - Trouvez instantanément ce que vous cherchez  
+🏷️ **Système de Tags** - Filtrez les pages par tags  
+📱 **Responsive** - Parfait sur tous les appareils  
+
+## 📋 Catégories
+
+- **🍳 Recettes** - Délicieuses recettes de cuisine
+- **📖 Guides** - Guides pratiques et détaillés
+- **📚 Références** - Documentation technique
 
 ## 🌐 Accès au wiki
 
 👉 **[Visiter le Wiki](https://bpic-code.github.io/docs/)**
-
-## 📁 Structure
-
-```
-docs/
-├── index.md              # Page d'accueil du wiki
-├── tags.html             # Page de tous les tags
-├── guides/               # Guides de démarrage
-├── tutoriels/            # Tutoriels détaillés
-├── references/           # Documentation et API
-├── faq/                  # Questions fréquentes
-└── contributions/        # Guide de contribution
-
-assets/
-├── css/style.css         # Styles personnalisés
-└── js/                   # Scripts JavaScript
-```
 
 ## 🚀 Utilisation locale
 
@@ -40,24 +29,36 @@ bundle install
 bundle exec jekyll serve
 ```
 
-## ✏️ Ajouter une page avec tags
+## 📝 Structure
+
+```
+docs/
+├── index.md
+├── recettes/
+├── guides/
+├── references/
+└── tags.html
+```
+
+## ✏️ Ajouter une page
+
+Créez un fichier markdown avec front matter :
 
 ```yaml
 ---
 layout: default
 title: Titre de la page
-tags: [tag1, tag2, tag3]
+tags: [tag1, tag2]
 ---
 ```
 
-## 🎨 Caractéristiques principales
+## 🎨 Caractéristiques du design
 
-- **Navbar fixe** avec logo, menu et recherche
-- **Sidebar dynamique** avec tous les tags
-- **Recherche en temps réel** avec Fuse.js
-- **Tags affichés** à la fin de chaque page
-- **Design responsive** adapté aux mobiles
-- **Thème Cayman** moderne et professionnel
+- **Sidebar fixe** à droite avec navigation
+- **Gradient violet** moderne (667eea → 764ba2)
+- **Tags cliquables** pour filtrer les pages
+- **Recherche intégrée** dans la sidebar
+- **Design épuré** et professionnel
 
 ---
 

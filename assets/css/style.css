@@ -1,12 +1,20 @@
 /* ==================== VARIABLES ==================== */
 :root {
-    --primary-color: #1e90ff;
-    --secondary-color: #ff6b6b;
-    --bg-color: #f5f5f5;
-    --text-color: #333;
-    --border-color: #ddd;
-    --shadow: 0 2px 8px rgba(0,0,0,0.1);
-    --navbar-height: 60px;
+    --primary-color: #667eea;
+    --primary-dark: #5568d3;
+    --accent-color: #764ba2;
+    --success-color: #48bb78;
+    --warning-color: #ed8936;
+    --danger-color: #f56565;
+    --bg-light: #f7fafc;
+    --bg-white: #ffffff;
+    --text-dark: #2d3748;
+    --text-light: #718096;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+    --sidebar-width: 280px;
 }
 
 /* ==================== RESET ==================== */
@@ -16,84 +24,75 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    color: var(--text-color);
-    background-color: var(--bg-color);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
     line-height: 1.6;
 }
 
-/* ==================== NAVBAR FIXE ==================== */
-.navbar {
+/* ==================== LAYOUT PRINCIPAL ==================== */
+.main-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ==================== SIDEBAR (À DROITE) ==================== */
+.sidebar {
     position: fixed;
-    top: 0;
-    left: 0;
     right: 0;
-    height: var(--navbar-height);
-    background: linear-gradient(135deg, #1e90ff 0%, #1873cc 100%);
+    top: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
     color: white;
-    box-shadow: var(--shadow);
-    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
 }
 
-.navbar-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+.sidebar-content {
+    padding: 30px 20px;
 }
 
-.navbar-brand a {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.navbar-menu {
-    display: flex;
-    gap: 15px;
-    flex: 1;
-    justify-content: center;
+.logo h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
 }
 
-.nav-link {
-    color: white;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    white-space: nowrap;
-    font-size: 0.9em;
-}
-
-.nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+.logo h2 {
+    font-size: 1.2em;
+    font-weight: 600;
+    opacity: 0.95;
 }
 
 /* ==================== BARRE DE RECHERCHE ==================== */
-.navbar-search {
+.search-section {
+    margin-bottom: 25px;
     position: relative;
-    min-width: 250px;
 }
 
 .search-box {
     width: 100%;
-    padding: 8px 15px;
+    padding: 10px 15px;
     border: none;
-    border-radius: 20px;
-    background: white;
-    color: var(--text-color);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--text-dark);
     font-size: 0.9em;
-    transition: box-shadow 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
 }
 
 .search-box:focus {
@@ -107,12 +106,12 @@ body {
     left: 0;
     right: 0;
     background: white;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: 8px;
     max-height: 300px;
     overflow-y: auto;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-lg);
     display: none;
+    z-index: 200;
 }
 
 .search-results.active {
@@ -120,14 +119,14 @@ body {
 }
 
 .search-result-item {
-    padding: 10px 15px;
+    padding: 12px 15px;
     border-bottom: 1px solid var(--border-color);
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .search-result-item:hover {
-    background-color: var(--bg-color);
+    background-color: var(--bg-light);
 }
 
 .search-result-item a {
@@ -136,248 +135,355 @@ body {
     font-weight: 500;
 }
 
-/* ==================== LAYOUT PRINCIPAL ==================== */
-main {
-    margin-top: var(--navbar-height);
-    min-height: calc(100vh - var(--navbar-height));
+/* ==================== NAVIGATION ==================== */
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
+.nav-link {
+    display: block;
+    padding: 12px 15px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+    font-weight: 500;
 }
 
-.page-wrapper {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 20px;
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transform: translateX(5px);
 }
 
-/* ==================== SIDEBAR TAGS ==================== */
-.sidebar {
-    position: sticky;
-    top: calc(var(--navbar-height) + 20px);
-    height: fit-content;
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border-left: 3px solid white;
+    padding-left: 12px;
 }
 
-.sidebar-section {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
+/* ==================== TAGS SIDEBAR ==================== */
+.tags-sidebar {
+    margin-top: 20px;
 }
 
-.sidebar-section h3 {
-    margin-bottom: 15px;
-    color: var(--primary-color);
-    font-size: 1.1em;
+.tags-sidebar h3 {
+    font-size: 0.9em;
+    margin-bottom: 12px;
+    opacity: 0.95;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .tags-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
 }
 
 .tag-badge {
     display: inline-block;
-    padding: 6px 12px;
-    background: #e0e7ff;
-    color: var(--primary-color);
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     border-radius: 20px;
     text-decoration: none;
-    font-size: 0.85em;
+    font-size: 0.8em;
     transition: all 0.3s;
-    border: 1px solid var(--primary-color);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     cursor: pointer;
 }
 
 .tag-badge:hover {
-    background: var(--primary-color);
-    color: white;
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
 }
 
-.tag-badge.active {
-    background: var(--primary-color);
-    color: white;
+/* ==================== CONTENU PRINCIPAL ==================== */
+.main-content {
+    margin-left: 0;
+    margin-right: var(--sidebar-width);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-/* ==================== CONTENU PRINCIPAL ==================== */
 .content {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
+    flex: 1;
+    padding: 40px 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .content h1 {
     color: var(--primary-color);
     margin-bottom: 20px;
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 10px;
+    font-size: 2.2em;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 15px;
 }
 
 .content h2 {
-    color: var(--text-color);
-    margin-top: 25px;
+    color: var(--text-dark);
+    margin-top: 30px;
     margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.content h3 {
+    color: var(--text-dark);
+    margin-top: 25px;
+    margin-bottom: 12px;
+    font-size: 1.2em;
+}
+
+.content p {
+    margin-bottom: 15px;
+    line-height: 1.8;
 }
 
 .content a {
     color: var(--primary-color);
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
 .content a:hover {
+    color: var(--primary-dark);
     text-decoration: underline;
 }
 
 .content code {
-    background: #f5f5f5;
+    background: var(--bg-light);
     padding: 2px 6px;
-    border-radius: 3px;
+    border-radius: 4px;
     font-family: 'Courier New', monospace;
+    font-size: 0.9em;
 }
 
 .content pre {
     background: #2d2d2d;
     color: #f8f8f2;
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 8px;
     overflow-x: auto;
-    margin: 15px 0;
+    margin: 20px 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.content ul, .content ol {
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+
+.content li {
+    margin-bottom: 8px;
 }
 
 .content table {
     width: 100%;
     border-collapse: collapse;
-    margin: 15px 0;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
 }
 
 .content table th,
 .content table td {
     border: 1px solid var(--border-color);
-    padding: 10px;
+    padding: 12px;
     text-align: left;
 }
 
 .content table th {
-    background: var(--bg-color);
-    font-weight: bold;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.content table tr:nth-child(even) {
+    background-color: var(--bg-light);
 }
 
 /* ==================== TAGS AFFICHÉS DANS LE CONTENU ==================== */
 .page-tags {
-    margin-top: 20px;
+    margin-top: 30px;
     padding-top: 20px;
-    border-top: 1px solid var(--border-color);
+    border-top: 2px solid var(--border-color);
 }
 
 .page-tags strong {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: var(--primary-color);
+    font-size: 0.95em;
 }
 
 .page-tag {
     display: inline-block;
-    margin: 5px 5px 5px 0;
-    padding: 5px 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 6px 6px 6px 0;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
     color: white;
-    border-radius: 15px;
+    border-radius: 20px;
     font-size: 0.85em;
     text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
 }
 
 .page-tag:hover {
-    opacity: 0.8;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
-/* ==================== NAVIGATION ENTRE PAGES ==================== */
-.page-navigation {
+/* ==================== ACCUEIL CATEGORIESS ==================== */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.category-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s;
+    border-top: 4px solid var(--primary-color);
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.category-card h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.category-card a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.category-card a:hover {
+    transform: translateX(5px);
+    color: white;
+    text-decoration: none;
+}
+
+/* ==================== LISTE DES PAGES ==================== */
+.pages-list {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.pages-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pages-list a {
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
-}
-
-.page-navigation a {
-    padding: 10px 15px;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 4px;
+    align-items: center;
     text-decoration: none;
-    transition: background 0.3s;
 }
 
-.page-navigation a:hover {
-    background: #1873cc;
+.pages-list a:hover {
+    text-decoration: underline;
 }
 
 /* ==================== FOOTER ==================== */
 .footer {
-    background: #333;
-    color: white;
     text-align: center;
     padding: 20px;
+    color: var(--text-light);
+    font-size: 0.9em;
     margin-top: 40px;
+    border-top: 1px solid var(--border-color);
 }
 
 /* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+    :root {
+        --sidebar-width: 240px;
+    }
+
+    .content {
+        padding: 30px 40px;
+    }
+}
+
 @media (max-width: 768px) {
-    .page-wrapper {
-        grid-template-columns: 1fr;
+    .main-wrapper {
+        flex-direction: column-reverse;
     }
 
     .sidebar {
         position: relative;
-        top: 0;
+        width: 100%;
+        height: auto;
+        box-shadow: var(--shadow-md);
     }
 
-    .navbar-container {
-        flex-wrap: wrap;
-        gap: 10px;
+    .main-content {
+        margin-right: 0;
     }
 
-    .navbar-menu {
-        flex-basis: 100%;
-        order: 3;
-        gap: 10px;
-        font-size: 0.85em;
-    }
-
-    .navbar-search {
-        flex-basis: 100%;
-        order: 4;
-        min-width: auto;
-    }
-
-    .nav-link {
-        padding: 6px 8px;
-        font-size: 0.8em;
+    .sidebar-content {
+        padding: 20px;
     }
 
     .content {
         padding: 20px;
     }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-results {
+        position: fixed;
+        width: 90%;
+        left: 5%;
+    }
 }
 
 @media (max-width: 480px) {
-    .navbar-menu {
-        flex-wrap: wrap;
+    .logo h2 {
+        font-size: 1em;
     }
 
-    .nav-link {
-        padding: 5px 6px;
-        font-size: 0.7em;
+    .content h1 {
+        font-size: 1.8em;
+    }
+
+    .content h2 {
+        font-size: 1.3em;
     }
 
     .tags-list {
-        gap: 5px;
+        gap: 4px;
     }
 
     .tag-badge {
