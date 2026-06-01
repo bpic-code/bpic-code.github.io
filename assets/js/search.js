@@ -4,13 +4,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!input || !results) return;
 
-  const response = await fetch("/docs/search.json");
-  const pages = await response.json();
+  const baseUrl = window.siteBaseUrl || "";
+
+  let pages = [];
+
+  try {
+    const response = await fetch(`${baseUrl}/search.json`);
+
+    if (!response.ok) {
+      throw new Error("Impossible de charger search.json");
+    }
+
+    pages = await response.json();
+  } catch (error) {
+    console.error(error);
+    results.innerHTML = "<p>Erreur de chargement de la recherche.</p>";
+    return;
+  }
 
   const fuse = new Fuse(pages, {
     keys: ["title", "content"],
     threshold: 0.35,
-    includeScore: true,
     minMatchCharLength: 2
   });
 
@@ -23,11 +37,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const matches = fuse.search(query).slice(0, 10);
 
-    if (matches.length === 0) {
-      results.innerHTML = `<p class="no-results">Aucun résultat</p>`;
-      return;
-    }
-
     matches.forEach(({ item }) => {
       const div = document.createElement("div");
       div.className = "search-result";
@@ -35,11 +44,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       div.innerHTML = `
         <a href="${item.url}">
           <strong>${item.title || "Sans titre"}</strong>
-          <span>${item.url}</span>
+          <small>${item.url}</small>
         </a>
       `;
 
       results.appendChild(div);
     });
+
+    if (matches.length === 0) {
+      results.innerHTML = "<p>Aucun résultat</p>";
+    }
   });
 });
