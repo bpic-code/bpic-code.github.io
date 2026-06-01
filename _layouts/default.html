@@ -32,26 +32,7 @@
                     <a href="/docs/tags.html" class="nav-link {% if page.url == '/docs/tags.html' %}active{% endif %}">🏷️ Tags</a>
                 </nav>
 
-                <!-- Tags disponibles -->
-                <div class="tags-sidebar">
-                    <h3>🏷️ Tags</h3>
-                    <div class="tags-list">
-                        {% assign all_tags = "" | split: "" %}
-                        {% for page in site.pages %}
-                            {% if page.tags %}
-                                {% for tag in page.tags %}
-                                    {% unless all_tags contains tag %}
-                                        {% assign all_tags = all_tags | push: tag %}
-                                    {% endunless %}
-                                {% endfor %}
-                            {% endif %}
-                        {% endfor %}
-                        
-                        {% for tag in all_tags | sort %}
-                            <a href="/docs/tags/{{ tag | slugify }}.html" class="tag-badge">{{ tag }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
+
             </div>
         </aside>
 
