@@ -78,6 +78,7 @@ body {
 }
 
 /* ==================== BARRE DE RECHERCHE ==================== */
+
 .search-section {
     margin-bottom: 25px;
     position: relative;
@@ -100,39 +101,78 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
 
+/* ==================== RESULTATS ==================== */
+
 .search-results {
     position: absolute;
     top: 45px;
     left: 0;
     right: 0;
-    background: white;
+    background: var(--bg-white);
     border-radius: 8px;
-    max-height: 300px;
+    max-height: 350px;
     overflow-y: auto;
     box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
     display: none;
     z-index: 200;
 }
 
-.search-results.active {
-    display: block;
-}
-
-.search-result-item {
-    padding: 12px 15px;
+.search-result {
     border-bottom: 1px solid var(--border-color);
-    cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease;
 }
 
-.search-result-item:hover {
+.search-result:last-child {
+    border-bottom: none;
+}
+
+.search-result:hover {
     background-color: var(--bg-light);
 }
 
-.search-result-item a {
+.search-result-link {
+    display: block;
+    padding: 12px 15px;
     text-decoration: none;
-    color: var(--primary-color);
+    color: var(--text-dark);
     font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.search-result-link:hover {
+    color: var(--primary-color);
+}
+
+.search-empty {
+    padding: 12px 15px;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.search-error {
+    padding: 12px 15px;
+    color: var(--danger-color);
+    font-weight: 500;
+}
+
+/* Scrollbar des résultats */
+
+.search-results::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-results::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+.search-results::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.search-results::-webkit-scrollbar-thumb:hover {
+    background: var(--text-light);
 }
 
 /* ==================== NAVIGATION ==================== */
