@@ -1,76 +1,63 @@
 # 📚 Mon Wiki
 
-Un wiki structuré et facile à naviguer créé avec GitHub Pages et Jekyll.
+Un wiki structuré, professionnel et facile à naviguer créé avec GitHub Pages et Jekyll.
+
+## 🌟 Caractéristiques
+
+✨ **Navigation fluide** - Barre de navigation fixe toujours visible  
+🔍 **Recherche en temps réel** - Trouvez rapidement ce que vous cherchez  
+🏷️ **Système de tags** - Organisez et filtrez le contenu par tags  
+🎨 **Design moderne** - Thème Cayman avec sidebar et responsive  
+📱 **Mobile-friendly** - Parfaitement adapté à tous les écrans
 
 ## 🌐 Accès au wiki
 
-👉 [Visiter le Wiki](https://bpic-code.github.io/docs/)
+👉 **[Visiter le Wiki](https://bpic-code.github.io/docs/)**
 
 ## 📁 Structure
 
 ```
 docs/
 ├── index.md              # Page d'accueil du wiki
+├── tags.html             # Page de tous les tags
 ├── guides/               # Guides de démarrage
-│   ├── index.md
-│   ├── installation.md
-│   ├── configuration.md
-│   └── demarrage-rapide.md
 ├── tutoriels/            # Tutoriels détaillés
-│   ├── index.md
-│   ├── tutoriel-1.md
-│   ├── tutoriel-2.md
-│   └── exemples/
-│       └── exemple-1.md
 ├── references/           # Documentation et API
-│   ├── index.md
-│   ├── api.md
-│   └── glossaire.md
 ├── faq/                  # Questions fréquentes
-│   ├── index.md
-│   └── questions-communes.md
 └── contributions/        # Guide de contribution
-    ├── index.md
-    └── comment-contribuer.md
+
+assets/
+├── css/style.css         # Styles personnalisés
+└── js/                   # Scripts JavaScript
 ```
 
 ## 🚀 Utilisation locale
 
-### Prérequis
-
-- Ruby 2.7+
-- Bundler
-
-### Installation
-
 ```bash
-# Cloner le repository
 git clone https://github.com/bpic-code/bpic-code.github.io.git
 cd bpic-code.github.io
-
-# Installer les dépendances
 bundle install
-
-# Lancer le serveur local
 bundle exec jekyll serve
 ```
 
-Visitez `http://localhost:4000` dans votre navigateur.
+## ✏️ Ajouter une page avec tags
 
-## ✏️ Comment modifier le wiki
+```yaml
+---
+layout: default
+title: Titre de la page
+tags: [tag1, tag2, tag3]
+---
+```
 
-1. Modifiez les fichiers markdown dans le dossier `docs/`
-2. Commitez vos changements : `git commit -m "Description"`
-3. Pushez vers GitHub : `git push`
-4. GitHub Pages déploiera automatiquement en quelques secondes
+## 🎨 Caractéristiques principales
 
-## 🤝 Contribuer
-
-Consultez le guide [Comment Contribuer](docs/contributions/comment-contribuer.md)
-
-## 📄 Licence
-
-Ce projet est ouvert à la contribution. Voir LICENSE pour plus de détails.
+- **Navbar fixe** avec logo, menu et recherche
+- **Sidebar dynamique** avec tous les tags
+- **Recherche en temps réel** avec Fuse.js
+- **Tags affichés** à la fin de chaque page
+- **Design responsive** adapté aux mobiles
+- **Thème Cayman** moderne et professionnel
 
 ---
 

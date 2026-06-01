@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 🚀 Démarrage Rapide
+tags: [quickstart, début, tutoriel]
 ---
 
 # 🚀 Démarrage Rapide
@@ -28,6 +30,13 @@ npm start
 - Contactez-nous sur GitHub
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

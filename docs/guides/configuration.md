@@ -1,5 +1,7 @@
 ---
 layout: default
+title: ⚙️ Configuration
+tags: [configuration, setup, tutoriel]
 ---
 
 # ⚙️ Configuration
@@ -25,6 +27,13 @@ PORT=3000
 | `PORT` | Port du serveur | `3000` |
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

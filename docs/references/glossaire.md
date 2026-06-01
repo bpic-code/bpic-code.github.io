@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 📖 Glossaire
+tags: [glossaire, référence, termes]
 ---
 
 # 📖 Glossaire
@@ -38,6 +40,13 @@ Representational State Transfer - Style architectural pour les services web.
 Utilisateur - Personne utilisant l'application.
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

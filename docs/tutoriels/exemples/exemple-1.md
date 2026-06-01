@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 💡 Exemple 1 - Cas d'usage réel
+tags: [exemple, pratique, tutoriel]
 ---
 
 # 💡 Exemple 1 - Cas d'usage réel
@@ -40,6 +42,13 @@ Output: résultat
 - Point clé 2 : Testez vos changements
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 🤝 Comment Contribuer
+tags: [contribution, guide, communauté]
 ---
 
 # 🤝 Comment Contribuer
@@ -51,12 +53,20 @@ Allez sur GitHub et créez une Pull Request vers la branche `main`.
 ✅ Vérifiez l'orthographe  
 ✅ Testez les liens  
 ✅ Respectez la structure des dossiers  
+✅ Ajoutez des tags pertinents à vos pages  
 
 ## Questions ?
 
 Ouvrez une issue ou contactez les mainteneurs.
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

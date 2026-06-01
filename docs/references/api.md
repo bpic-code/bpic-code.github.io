@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 🔌 Documentation API
+tags: [api, référence, documentation]
 ---
 
 # 🔌 Documentation API
@@ -44,6 +46,13 @@ Crée un nouvel utilisateur.
 Récupère un utilisateur spécifique.
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

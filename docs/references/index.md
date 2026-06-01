@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 📚 Références
+tags: [référence, api, documentation]
 ---
 
 # 📚 Références
@@ -14,6 +16,13 @@ layout: default
 - [Glossaire](glossaire.md)
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

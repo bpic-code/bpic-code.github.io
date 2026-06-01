@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 🎓 Tutoriel 2 - Fonctionnalités Avancées
+tags: [tutoriel, avancé, apprentissage]
 ---
 
 # 🎓 Tutoriel 2 - Fonctionnalités Avancées
@@ -31,6 +33,13 @@ const result = await processData({
 Bravo ! Consultez les [Exemples](exemples/exemple-1.md) pour voir des cas d'usage réels.
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

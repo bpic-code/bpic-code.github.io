@@ -1,0 +1,31 @@
+---
+layout: default
+title: 🏷️ Tous les Tags
+permalink: /docs/tags.html
+---
+
+# 🏷️ Tous les Tags
+
+{% assign all_tags = "" | split: "" %}
+{% for page in site.pages %}
+    {% if page.tags %}
+        {% for tag in page.tags %}
+            {% unless all_tags contains tag %}
+                {% assign all_tags = all_tags | push: tag %}
+            {% endunless %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+## Tags disponibles
+
+{% for tag in all_tags | sort %}
+  ### {{ tag }}
+  
+  Pages avec ce tag :
+  {% assign tagged_pages = site.pages | where_exp: "page", "page.tags contains tag" %}
+  {% for page in tagged_pages %}
+    - [{{ page.title }}]({{ page.url }})
+  {% endfor %}
+
+{% endfor %}

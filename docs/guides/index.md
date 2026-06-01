@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 📖 Guides
+tags: [guide, tutoriel, bases]
 ---
 
 # 📖 Guides
@@ -15,6 +17,13 @@ layout: default
 - [Démarrage Rapide](demarrage-rapide.md)
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

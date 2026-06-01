@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 🎓 Tutoriel 1 - Les Bases
+tags: [tutoriel, bases, apprentissage, intermediaire]
 ---
 
 # 🎓 Tutoriel 1 - Les Bases
@@ -28,6 +30,13 @@ console.log('Hello World');
 Continuez vers le [Tutoriel 2](tutoriel-2.md) pour des concepts avancés.
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 📦 Installation
+tags: [installation, setup, tutoriel]
 ---
 
 # 📦 Installation
@@ -33,6 +35,13 @@ npm --version
 ```
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

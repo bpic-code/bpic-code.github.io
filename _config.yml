@@ -1,15 +1,35 @@
-theme: jekyll-theme-slate
+theme: jekyll-theme-cayman
 title: Mon Wiki
 description: Wiki structuré et facile à naviguer
 lang: fr
+url: "https://bpic-code.github.io"
 
 # Configuration Jekyll
 markdown: kramdown
 highlighter: rouge
 plugins:
   - jekyll-relative-links
+  - jekyll-paginate
+  - jekyll-gist
+  - jekyll-feed
+
 relative_links:
   enabled: true
   collections: true
+
+paginate: 10
+paginate_path: "/page:num/"
+
+# Collections pour les tags
+collections:
+  tags:
+    output: true
+
+# Defaults pour les pages
+defaults:
+  - scope:
+      path: "docs"
+    values:
+      layout: default
 
 show_downloads: false

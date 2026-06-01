@@ -1,5 +1,7 @@
 ---
 layout: default
+title: 🎓 Tutoriels
+tags: [tutoriel, apprentissage]
 ---
 
 # 🎓 Tutoriels
@@ -18,6 +20,13 @@ layout: default
 - [Exemple 1](exemples/exemple-1.md)
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 

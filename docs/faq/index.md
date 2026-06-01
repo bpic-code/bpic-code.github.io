@@ -1,5 +1,7 @@
 ---
 layout: default
+title: ❓ FAQ
+tags: [faq, questions, aide]
 ---
 
 # ❓ FAQ
@@ -13,6 +15,13 @@ layout: default
 - [Questions Communes](questions-communes.md)
 
 ---
+
+<div class="page-tags">
+  <strong>Tags :</strong>
+  {% for tag in page.tags %}
+    <a href="/docs/tags.html" class="page-tag">{{ tag }}</a>
+  {% endfor %}
+</div>
 
 ## 🔗 Navigation
 
